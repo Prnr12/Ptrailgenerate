@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Paper Trail — Legal Demand Letters, Built for You</title>
-<meta name="description" content="Generate a state-specific legal demand letter in minutes. Security deposits, refunds, unpaid wages, and more — preview free, unlock for $9.99.">
+<title>The Paper Trail — Write Your Letter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -21,380 +20,79 @@
     --line: rgba(27,27,23,0.16);
     --line-strong: rgba(27,27,23,0.32);
   }
-
   *{margin:0;padding:0;box-sizing:border-box;}
-
-  html{scroll-behavior:smooth;}
-
   body{
     background:var(--manila);
     color:var(--ink);
     font-family:'Source Serif 4', Georgia, serif;
     -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    min-height:100vh;
   }
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
-  }
-
   a{color:inherit;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px;}
 
-  .wrap{
-    max-width:1120px;
-    margin:0 auto;
-    padding:0 28px;
-  }
-
-  /* texture */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-    opacity:0.5;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(27,27,23,0.025) 0, transparent 45%),
-      radial-gradient(circle at 80% 70%, rgba(27,27,23,0.02) 0, transparent 50%);
-  }
-
-  /* ---------- header ---------- */
   header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:rgba(250,247,239,0.92);
-    backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
+    background:rgba(250,247,239,0.92);
+    padding:18px 0;
   }
-  .nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:18px 28px;
-    max-width:1120px;
-    margin:0 auto;
-  }
+  .nav{display:flex; align-items:center; justify-content:space-between;}
   .brand{
     font-family:'Special Elite', monospace;
-    font-size:18px;
-    letter-spacing:0.02em;
-    display:flex;
-    align-items:center;
-    gap:10px;
+    font-size:17px;
+    display:flex; align-items:center; gap:10px;
   }
   .brand .mark{
-    width:22px;height:22px;
+    width:21px;height:21px;
     border:1.5px solid var(--ink);
     border-radius:2px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:10px;
     transform:rotate(-3deg);
   }
-  .nav-cta{
+  .progress{
     font-family:'JetBrains Mono', monospace;
-    font-size:12.5px;
-    letter-spacing:0.04em;
+    font-size:11.5px;
+    letter-spacing:0.06em;
     text-transform:uppercase;
-    text-decoration:none;
-    color:var(--paper);
-    background:var(--ink);
-    padding:10px 18px;
-    border-radius:2px;
-    transition:background 0.2s ease, transform 0.15s ease;
+    color:var(--ink-soft);
   }
-  .nav-cta:hover{background:var(--stamp); transform:translateY(-1px);}
 
-  /* ---------- hero ---------- */
-  .hero{
-    padding:76px 0 64px;
-    position:relative;
-    z-index:1;
-  }
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1.05fr 0.95fr;
-    gap:56px;
-    align-items:center;
-  }
+  main{padding:48px 0 80px;}
+
+  .screen{display:none;}
+  .screen.active{display:block;}
+
   .eyebrow{
     font-family:'JetBrains Mono', monospace;
     font-size:12px;
-    letter-spacing:0.12em;
+    letter-spacing:0.1em;
     text-transform:uppercase;
     color:var(--stamp);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:18px;
   }
-  .eyebrow::before{
-    content:"";
-    width:26px;height:1px;
-    background:var(--stamp);
-  }
+  .eyebrow::before{content:""; width:24px; height:1px; background:var(--stamp);}
+
   h1{
     font-family:'Special Elite', monospace;
     font-weight:400;
-    font-size:clamp(34px, 4.6vw, 58px);
-    line-height:1.08;
-    letter-spacing:-0.01em;
-    margin-bottom:24px;
+    font-size:clamp(26px, 3.4vw, 36px);
+    line-height:1.2;
+    margin-bottom:14px;
   }
-  h1 em{
-    font-style:normal;
-    color:var(--stamp);
-  }
-  .hero-sub{
-    font-size:18px;
+  .lead{
+    font-size:16px;
     line-height:1.65;
     color:var(--ink-soft);
-    max-width:480px;
-    margin-bottom:34px;
-  }
-  .hero-actions{
-    display:flex;
-    align-items:center;
-    gap:22px;
-    flex-wrap:wrap;
-  }
-  .btn-primary{
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    letter-spacing:0.04em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--paper);
-    background:var(--ink);
-    padding:16px 28px;
-    border-radius:2px;
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    transition:background 0.2s ease, transform 0.15s ease;
-    box-shadow:3px 3px 0 var(--line-strong);
-  }
-  .btn-primary:hover{background:var(--stamp-dark); transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--line-strong);}
-  .hero-meta{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    color:var(--ink-soft);
-    letter-spacing:0.02em;
+    max-width:520px;
+    margin-bottom:40px;
   }
 
-  /* the letter artifact — signature element */
-  .letter-stage{
-    position:relative;
-    perspective:1400px;
-  }
-  .letter{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:1px;
-    box-shadow:0 24px 60px -20px rgba(27,27,23,0.35), 0 2px 0 rgba(27,27,23,0.05);
-    padding:38px 38px 34px;
-    position:relative;
-    transform:rotate(-1.2deg);
-    font-family:'JetBrains Mono', monospace;
-    font-size:12.5px;
-    line-height:1.85;
-    color:var(--ink-soft);
-    min-height:430px;
-  }
-  .letter::before{
-    content:"";
-    position:absolute;
-    inset:14px;
-    border:1px dashed var(--line);
-    pointer-events:none;
-  }
-  .letter-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:22px;
-    padding-bottom:14px;
-    border-bottom:1px solid var(--line);
-  }
-  .letter-head .who{
-    font-family:'Special Elite', monospace;
-    font-size:13.5px;
-    color:var(--ink);
-  }
-  .letter-line{
-    height:9px;
-    background:var(--line);
-    border-radius:1px;
-    margin-bottom:11px;
-    opacity:0;
-    animation:typeIn 0.5s ease forwards;
-  }
-  .letter-line.w1{width:88%;}
-  .letter-line.w2{width:96%;}
-  .letter-line.w3{width:64%;}
-  .letter-line.w4{width:91%;}
-  .letter-line.w5{width:78%;}
-  .letter-line.w6{width:54%;}
-  .letter-line.gap{margin-bottom:20px;}
-
-  .letter-line:nth-child(1){animation-delay:0.15s;}
-  .letter-head + .letter-line.w1{animation-delay:0.5s;}
-
-  @keyframes typeIn{
-    from{opacity:0; transform:translateX(-6px);}
-    to{opacity:1; transform:translateX(0);}
-  }
-
-  .stamp-mark{
-    position:absolute;
-    bottom:30px;
-    right:34px;
-    width:118px;
-    height:118px;
-    border:2.5px solid var(--stamp);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transform:rotate(-14deg) scale(0.85);
-    opacity:0;
-    color:var(--stamp);
-    font-family:'Special Elite', monospace;
-    font-size:11px;
-    letter-spacing:0.08em;
-    text-align:center;
-    text-transform:uppercase;
-    line-height:1.4;
-    animation:stampIn 0.4s cubic-bezier(.2,1.4,.4,1) forwards;
-    animation-delay:1.9s;
-    mix-blend-mode:multiply;
-  }
-  .stamp-mark::after{
-    content:"";
-    position:absolute;
-    inset:7px;
-    border:1px solid var(--stamp);
-    border-radius:50%;
-  }
-  @keyframes stampIn{
-    0%{opacity:0; transform:rotate(-14deg) scale(1.6);}
-    60%{opacity:1; transform:rotate(-14deg) scale(0.78);}
-    100%{opacity:1; transform:rotate(-14deg) scale(0.85);}
-  }
-
-  .receipt-tag{
-    position:absolute;
-    top:-16px;
-    left:32px;
-    background:var(--stamp);
-    color:var(--paper);
-    font-family:'JetBrains Mono', monospace;
-    font-size:10.5px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    padding:6px 12px;
-    border-radius:1px;
-    transform:rotate(-2deg);
-    box-shadow:2px 2px 0 rgba(27,27,23,0.2);
-  }
-
-  /* ---------- trust strip ---------- */
-  .strip{
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    background:var(--manila-dark);
-  }
-  .strip-grid{
+  /* type picker */
+  .type-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    text-align:center;
-  }
-  .strip-item{
-    padding:22px 16px;
-    border-right:1px solid var(--line);
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.03em;
-    color:var(--ink-soft);
-  }
-  .strip-item:last-child{border-right:none;}
-  .strip-item strong{
-    display:block;
-    font-family:'Special Elite', monospace;
-    font-size:22px;
-    color:var(--ink);
-    margin-bottom:4px;
-  }
-
-  /* ---------- section shared ---------- */
-  section{
-    padding:88px 0;
-    position:relative;
-    z-index:1;
-  }
-  .section-head{
-    max-width:600px;
-    margin-bottom:52px;
-  }
-  .section-head .eyebrow{margin-bottom:16px;}
-  h2{
-    font-family:'Special Elite', monospace;
-    font-weight:400;
-    font-size:clamp(26px, 3vw, 38px);
-    line-height:1.18;
-    margin-bottom:16px;
-  }
-  .section-head p{
-    font-size:16.5px;
-    line-height:1.7;
-    color:var(--ink-soft);
-  }
-
-  /* ---------- how it works ---------- */
-  .steps{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:0;
-    border:1px solid var(--line-strong);
-    border-radius:2px;
-    overflow:hidden;
-    background:var(--paper);
-  }
-  .step{
-    padding:32px 26px;
-    border-right:1px solid var(--line);
-    position:relative;
-  }
-  .step:last-child{border-right:none;}
-  .step .tab{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.08em;
-    color:var(--olive);
-    text-transform:uppercase;
-    margin-bottom:14px;
-    display:block;
-  }
-  .step h3{
-    font-family:'Special Elite', monospace;
-    font-size:17px;
-    font-weight:400;
-    margin-bottom:10px;
-    line-height:1.3;
-  }
-  .step p{
-    font-size:14.5px;
-    line-height:1.6;
-    color:var(--ink-soft);
-  }
-
-  /* ---------- letter types ---------- */
-  .types-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(2, 1fr);
     gap:14px;
   }
   .type-card{
@@ -402,104 +100,30 @@
     border:1px solid var(--line);
     border-radius:2px;
     padding:22px 20px;
-    transition:transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    text-align:left;
+    cursor:pointer;
+    transition:transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    font-family:inherit;
   }
   .type-card:hover{
-    transform:translateY(-3px);
+    transform:translateY(-2px);
     border-color:var(--line-strong);
-    box-shadow:0 10px 24px -14px rgba(27,27,23,0.3);
+    box-shadow:0 10px 22px -14px rgba(27,27,23,0.3);
   }
-  .type-card .file-tab{
-    width:30px;height:4px;
-    background:var(--olive);
-    border-radius:2px;
-    margin-bottom:16px;
-  }
-  .type-card h4{
-    font-family:'Special Elite', monospace;
-    font-size:14.5px;
-    font-weight:400;
-    margin-bottom:8px;
-    line-height:1.3;
-  }
-  .type-card p{
-    font-size:13px;
-    line-height:1.55;
-    color:var(--ink-soft);
-  }
-  .types-footnote{
-    margin-top:20px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    color:var(--ink-soft);
-    letter-spacing:0.02em;
-  }
-  .types-footnote strong{color:var(--ink);}
+  .type-card .file-tab{width:28px; height:4px; background:var(--olive); border-radius:2px; margin-bottom:14px;}
+  .type-card h4{font-family:'Special Elite', monospace; font-size:14.5px; font-weight:400; margin-bottom:6px;}
+  .type-card p{font-size:12.5px; line-height:1.5; color:var(--ink-soft);}
 
-  /* ---------- states ---------- */
-  .states-band{
-    background:var(--ink);
-    color:var(--manila);
-  }
-  .states-inner{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:40px;
-    flex-wrap:wrap;
-  }
-  .states-copy{flex:1 1 380px;}
-  .states-band h2{color:var(--paper);}
-  .states-band .section-head p{color:rgba(250,247,239,0.7);}
-  .states-band .eyebrow{color:#D98E7F;}
-  .states-band .eyebrow::before{background:#D98E7F;}
-  .map-grid{
-    display:grid;
-    grid-template-columns:repeat(10, 1fr);
-    gap:5px;
-    flex:1 1 320px;
-    max-width:380px;
-  }
-  .state-cell{
-    aspect-ratio:1;
-    background:rgba(250,247,239,0.08);
-    border:1px solid rgba(250,247,239,0.14);
-    border-radius:1px;
-    transition:background 0.3s ease;
-  }
-  .state-cell.lit{background:var(--stamp); border-color:var(--stamp);}
-
-  /* ---------- demo / tool preview ---------- */
-  .demo-panel{
+  /* form */
+  .form-panel{
     background:var(--paper);
     border:1px solid var(--line-strong);
     border-radius:3px;
-    box-shadow:0 30px 70px -30px rgba(27,27,23,0.4);
-    overflow:hidden;
+    padding:32px 28px;
+    box-shadow:0 20px 50px -28px rgba(27,27,23,0.35);
   }
-  .demo-bar{
-    background:var(--manila-dark);
-    border-bottom:1px solid var(--line);
-    padding:12px 20px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .demo-bar .dot{width:9px;height:9px;border-radius:50%;background:var(--line-strong);}
-  .demo-bar .dot:nth-child(1){background:var(--stamp);}
-  .demo-bar span.url{
-    margin-left:8px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    color:var(--ink-soft);
-  }
-  .demo-body{
-    padding:36px 40px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:36px;
-  }
-  .demo-field label{
+  .field{margin-bottom:24px;}
+  .field label{
     display:block;
     font-family:'JetBrains Mono', monospace;
     font-size:11px;
@@ -508,318 +132,544 @@
     color:var(--olive);
     margin-bottom:8px;
   }
-  .demo-field .value{
-    font-family:'Source Serif 4', serif;
-    font-size:15.5px;
-    padding-bottom:10px;
-    border-bottom:1.5px solid var(--ink);
-    margin-bottom:24px;
-  }
-  .demo-cta-row{
-    grid-column:1 / -1;
-    display:flex;
-    justify-content:flex-end;
-    margin-top:4px;
-  }
-
-  /* ---------- final cta ---------- */
-  .final-cta{
-    text-align:center;
-    padding:96px 0 110px;
-  }
-  .final-cta h2{
-    font-size:clamp(28px, 3.6vw, 44px);
-    margin-bottom:18px;
-  }
-  .final-cta p{
-    max-width:480px;
-    margin:0 auto 36px;
+  .field .hint{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
     color:var(--ink-soft);
-    font-size:17px;
-    line-height:1.65;
+    opacity:0.75;
+    margin-top:5px;
+    display:block;
   }
+  .field input, .field select, .field textarea{
+    width:100%;
+    border:none;
+    border-bottom:1.5px solid var(--ink);
+    background:transparent;
+    font-family:'Source Serif 4', serif;
+    font-size:16px;
+    padding:6px 2px 10px;
+    color:var(--ink);
+  }
+  .field textarea{
+    resize:vertical;
+    min-height:84px;
+    line-height:1.5;
+    font-size:15px;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none;
+    border-bottom-color:var(--stamp);
+  }
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
 
-  /* ---------- footer ---------- */
-  footer{
-    border-top:1px solid var(--line);
-    padding:36px 0 44px;
+  .btn-primary{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border:none;
+    color:var(--paper);
+    background:var(--ink);
+    padding:15px 26px;
+    border-radius:2px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:background 0.2s ease, transform 0.15s ease;
+    box-shadow:3px 3px 0 var(--line-strong);
   }
-  .foot-grid{
+  .btn-primary:hover{background:var(--stamp-dark); transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--line-strong);}
+  .btn-ghost{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    background:none;
+    border:1px solid var(--line-strong);
+    color:var(--ink);
+    padding:13px 22px;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  .btn-ghost:hover{border-color:var(--ink);}
+  .form-actions{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    flex-wrap:wrap;
-    gap:16px;
-  }
-  .foot-grid .brand{font-size:15px;}
-  footer .fine{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    color:var(--ink-soft);
-    letter-spacing:0.02em;
-    max-width:560px;
-    line-height:1.6;
+    margin-top:8px;
   }
 
-  /* ---------- responsive ---------- */
-  @media (max-width: 880px){
-    .hero-grid{grid-template-columns:1fr; gap:48px;}
-    .letter-stage{order:-1;}
-    .strip-grid{grid-template-columns:repeat(2,1fr);}
-    .strip-item:nth-child(2){border-right:none;}
-    .strip-item:nth-child(1), .strip-item:nth-child(2){border-bottom:1px solid var(--line);}
-    .steps{grid-template-columns:1fr;}
-    .step{border-right:none; border-bottom:1px solid var(--line);}
-    .step:last-child{border-bottom:none;}
-    .types-grid{grid-template-columns:repeat(2,1fr);}
-    .states-inner{flex-direction:column;}
-    .demo-body{grid-template-columns:1fr; padding:28px 24px;}
+  /* letter output */
+  .letter-doc{
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    border-radius:2px;
+    padding:52px 48px;
+    box-shadow:0 24px 60px -30px rgba(27,27,23,0.35);
+    font-family:'JetBrains Mono', monospace;
+    font-size:13.5px;
+    line-height:1.85;
+    color:var(--ink);
+    max-width:680px;
   }
-  @media (max-width: 540px){
-    .nav{padding:14px 20px;}
-    .hero{padding:48px 0 44px;}
-    .types-grid{grid-template-columns:1fr;}
-    .map-grid{max-width:100%;}
+  .letter-doc .lhead{margin-bottom:30px;}
+  .letter-doc .lhead .name{font-family:'Special Elite', monospace; font-size:14px; margin-bottom:2px;}
+  .letter-doc .ldate{margin:24px 0;}
+  .letter-doc .lrecipient{margin-bottom:24px;}
+  .letter-doc .lre{
+    font-weight:600;
+    margin:24px 0;
+    padding:10px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .letter-doc p{margin-bottom:18px;}
+  .letter-doc .lsign{margin-top:36px;}
+  .letter-doc .statute-note{
+    margin-top:30px;
+    padding-top:18px;
+    border-top:1px dashed var(--line);
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+
+  .output-actions{
+    display:flex;
+    gap:14px;
+    margin-top:28px;
+    flex-wrap:wrap;
+  }
+
+  .doc-disclaimer{
+    margin-top:36px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    line-height:1.6;
+    max-width:680px;
+  }
+
+  @media (max-width: 640px){
+    .type-grid{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .form-panel{padding:26px 20px;}
+    .letter-doc{padding:32px 24px;}
+    .output-actions{flex-direction:column;}
+    .output-actions .btn-primary, .output-actions .btn-ghost{justify-content:center;}
+  }
+
+  @media print{
+    header, .form-actions, .output-actions, .doc-disclaimer, .progress{display:none !important;}
+    body{background:#fff;}
+    .letter-doc{box-shadow:none; border:none; padding:0;}
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="nav">
+  <div class="wrap nav">
     <div class="brand"><span class="mark">¶</span> The Paper Trail</div>
-    <a href="#generate" class="nav-cta">Write your letter</a>
+    <div class="progress" id="progressLabel">Step 1 of 3</div>
   </div>
 </header>
 
 <main>
+  <div class="wrap">
 
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="eyebrow">Preview free · No lawyer required</div>
-        <h1>Get it in <em>writing.</em><br>Get it on record.</h1>
-        <p class="hero-sub">A demand letter is the document that turns "I'm upset" into a legal record. We write yours — security deposit, refund, unpaid wages, or otherwise — matched to your state's actual statutes, in about two minutes.</p>
-        <div class="hero-actions">
-          <a href="#generate" class="btn-primary">Preview my letter →</a>
-          <div class="hero-meta">8 letter types — all 50 states</div>
-        </div>
-      </div>
+    <!-- SCREEN 1: pick type -->
+    <section class="screen active" id="screen-type">
+      <div class="eyebrow">Step 1 — Choose your situation</div>
+      <h1>What happened?</h1>
+      <p class="lead">Pick the one that's closest to your situation. You'll fill in the specifics next.</p>
+      <div class="type-grid" id="typeGrid"></div>
+    </section>
 
-      <div class="letter-stage">
-        <div class="receipt-tag">Preview · Unlock to Send</div>
-        <div class="letter">
-          <div class="letter-head">
-            <div class="who">RE: Demand for Return<br>of Security Deposit</div>
-            <div class="who" style="text-align:right;">04 / 19 / 2026<br>Austin, TX</div>
+    <!-- SCREEN 2: form -->
+    <section class="screen" id="screen-form">
+      <div class="eyebrow">Step 2 — The details</div>
+      <h1 id="formTitle">Tell us what happened</h1>
+      <p class="lead">No legal language needed — just the facts, dates, and amounts.</p>
+
+      <div class="form-panel">
+        <form id="letterForm">
+          <div class="field-row">
+            <div class="field">
+              <label>Your full name</label>
+              <input type="text" id="f_yourName" required placeholder="Jordan Reyes">
+            </div>
+            <div class="field">
+              <label>Your state</label>
+              <select id="f_state" required></select>
+            </div>
           </div>
-          <div class="letter-line w1"></div>
-          <div class="letter-line w2"></div>
-          <div class="letter-line w3 gap"></div>
-          <div class="letter-line w1"></div>
-          <div class="letter-line w4"></div>
-          <div class="letter-line w5 gap"></div>
-          <div class="letter-line w2"></div>
-          <div class="letter-line w6"></div>
-          <div class="stamp-mark">Unlock<br>to Send</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <div class="strip">
-    <div class="wrap strip-grid">
-      <div class="strip-item"><strong>8</strong>letter types covered</div>
-      <div class="strip-item"><strong>50</strong>states matched to statute</div>
-      <div class="strip-item"><strong>~2 min</strong>to a finished letter</div>
-      <div class="strip-item"><strong>$9.99</strong>one-time, no subscription</div>
-    </div>
+          <div class="field">
+            <label>Your mailing address</label>
+            <input type="text" id="f_yourAddress" required placeholder="123 Main St, Austin, TX 78701">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label id="recipientLabel">Other party's name</label>
+              <input type="text" id="f_recipientName" required placeholder="Acme Property Management">
+            </div>
+            <div class="field">
+              <label>Amount owed</label>
+              <input type="text" id="f_amount" required placeholder="1,400.00">
+            </div>
+          </div>
+
+          <div class="field">
+            <label id="recipientAddressLabel">Other party's address</label>
+            <input type="text" id="f_recipientAddress" required placeholder="456 Oak Ave, Austin, TX 78702">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label id="dateLabel">Key date</label>
+              <input type="date" id="f_keyDate" required>
+              <span class="hint" id="dateHint">e.g. move-out date, due date, or date of incident</span>
+            </div>
+            <div class="field">
+              <label>Deadline to respond</label>
+              <select id="f_deadline">
+                <option value="10">10 days</option>
+                <option value="14" selected>14 days</option>
+                <option value="30">30 days</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label id="detailsLabel">Briefly describe what happened</label>
+            <textarea id="f_details" required placeholder="Explain it like you're telling a friend. Include any relevant numbers, conversations, or dates."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-ghost" id="backToType">← Back</button>
+            <button type="submit" class="btn-primary">Preview my letter →</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: output -->
+    <section class="screen" id="screen-output">
+      <div class="eyebrow">Step 3 — Your letter</div>
+      <h1>Ready to send.</h1>
+      <p class="lead">Review it below. Print it, sign it, and mail it certified with return receipt for the strongest paper trail.</p>
+
+      <div class="letter-doc" id="letterDoc"></div>
+
+      <div class="output-actions">
+        <button class="btn-primary" id="printBtn">Print / Save as PDF →</button>
+        <button class="btn-ghost" id="copyBtn">Copy text</button>
+        <button class="btn-ghost" id="editBtn">← Edit details</button>
+        <button class="btn-ghost" id="startOverBtn">Start a new letter</button>
+      </div>
+
+      <p class="doc-disclaimer">This letter is generated as an educational tool based on the information you provided and general state practice — it is not legal advice. For high-value or complex disputes, consider consulting a licensed attorney in your state. Sending by certified mail with return receipt requested creates the strongest record that the letter was received.</p>
+    </section>
+
   </div>
-
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">How it works</div>
-        <h2>Four fields. One letter. Zero billable hours.</h2>
-        <p>Most disputes don't need a lawyer — they need someone to put the facts in writing, cite the right law, and send it somewhere that has to respond.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <span class="tab">Step 1</span>
-          <h3>Pick the dispute</h3>
-          <p>Security deposit, bad refund, unpaid final paycheck — choose from 8 common situations.</p>
-        </div>
-        <div class="step">
-          <span class="tab">Step 2</span>
-          <h3>Tell us the facts</h3>
-          <p>Dates, amounts, names. No legal language required — write it like you're explaining it to a friend.</p>
-        </div>
-        <div class="step">
-          <span class="tab">Step 3</span>
-          <h3>We cite your state</h3>
-          <p>The letter pulls in the actual statute and deadline that applies where you live.</p>
-        </div>
-        <div class="step">
-          <span class="tab">Step 4</span>
-          <h3>Unlock & send</h3>
-          <p>Preview it free. Unlock the full letter for $9.99 — ready to print, sign, and mail with a return receipt.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">What we cover</div>
-        <h2>Eight situations people deal with constantly — and rarely fight.</h2>
-      </div>
-      <div class="types-grid">
-        <div class="type-card">
-          <div class="file-tab"></div>
-          <h4>Security deposit</h4>
-          <p>Landlord kept it, went silent, or missed the legal deadline to return it.</p>
-        </div>
-        <div class="type-card">
-          <div class="file-tab"></div>
-          <h4>Refund owed</h4>
-          <p>A business took payment and never delivered, or won't honor its own return policy.</p>
-        </div>
-        <div class="type-card">
-          <div class="file-tab"></div>
-          <h4>Unpaid final wages</h4>
-          <p>Last paycheck is late or short, past your state's required payout window.</p>
-        </div>
-        <div class="type-card">
-          <div class="file-tab"></div>
-          <h4>Property damage</h4>
-          <p>Someone damaged your property and won't cover the cost to repair it.</p>
-        </div>
-        <div class="type-card">
-          <div class="file-tab"></div>
-          <h4>Breach of contract</h4>
-          <p>A signed agreement was broken, and you need it documented before pursuing further.</p>
-        </div>
-        <div class="type-card">
-          <div class="file-tab"></div>
-          <h4>Unpaid invoice</h4>
-          <p>You did the work or delivered the goods. Payment never came.</p>
-        </div>
-        <div class="type-card">
-          <div class="file-tab"></div>
-          <h4>Debt collector overreach</h4>
-          <p>Harassment, wrong amounts, or contact after you've asked them to stop.</p>
-        </div>
-        <div class="type-card">
-          <div class="file-tab"></div>
-          <h4>General demand</h4>
-          <p>Doesn't fit a category above, but you need it in writing and on the record regardless.</p>
-        </div>
-      </div>
-      <p class="types-footnote">Every letter includes <strong>citations to your state's relevant statute</strong> where one applies — so the recipient knows you're not guessing.</p>
-    </div>
-  </section>
-
-  <div class="states-band">
-    <div class="wrap states-inner">
-      <div class="states-copy section-head" style="margin-bottom:0;">
-        <div class="eyebrow">Built state by state</div>
-        <h2>Texas deposit law isn't California deposit law.</h2>
-        <p>Deadlines, required notices, and penalties for landlords or businesses that ignore them all vary by state. We match your letter to where you actually live — not a generic template with the state name swapped in.</p>
-      </div>
-      <div class="map-grid" aria-hidden="true">
-        <!-- decorative grid representing 50 states, ~14 lit -->
-      </div>
-    </div>
-  </div>
-
-  <section id="generate">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">See it work</div>
-        <h2>Preview free. Unlock for $9.99.</h2>
-        <p>No account needed to see your letter take shape. Fill in what happened, preview the opening — then unlock the complete, state-cited version when you're ready to send it.</p>
-      </div>
-      <div class="demo-panel">
-        <div class="demo-bar">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="url">papertrail123.netlify.app</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-field">
-            <label>Letter type</label>
-            <div class="value">Security deposit not returned</div>
-          </div>
-          <div class="demo-field">
-            <label>State</label>
-            <div class="value">Texas</div>
-          </div>
-          <div class="demo-field">
-            <label>Amount owed</label>
-            <div class="value">$1,400.00</div>
-          </div>
-          <div class="demo-field">
-            <label>Days since move-out</label>
-            <div class="value">38 days</div>
-          </div>
-          <div class="demo-cta-row">
-            <a href="https://shestillbuilt.gumroad.com/l/eezib" class="btn-primary" target="_blank" rel="noopener">Unlock full letter — $9.99 →</a>
-          </div>
-        </div>
-      </div>
-      <p class="types-footnote" style="margin-top:16px;">Preview shows the opening paragraph and structure free. Unlocking gets you the complete, signed-ready letter.</p>
-    </div>
-  </section>
-
-  <section class="final-cta">
-    <div class="wrap">
-      <h2>Try it free.<br>Send it for $9.99.</h2>
-      <p>Two minutes from now, you could be looking at your own demand letter. Preview it at no cost — unlock the finished version only when you're ready to mail it.</p>
-      <a href="#generate" class="btn-primary">Preview my letter →</a>
-    </div>
-  </section>
-
 </main>
 
-<footer>
-  <div class="wrap foot-grid">
-    <div class="brand"><span class="mark">¶</span> The Paper Trail</div>
-    <p class="fine">Educational tool, not legal advice. Letters are generated based on general state statutes and the facts you provide — for complex disputes or large amounts, consider consulting a licensed attorney in your state.</p>
-  </div>
-</footer>
-
 <script>
-  // Light up a deterministic-looking but varied set of "states" in the decorative grid
-  document.querySelectorAll('.map-grid').forEach(grid => {
-    for (let i = 0; i < 50; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'state-cell';
-      grid.appendChild(cell);
+  // ---------- data ----------
+  const STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+
+  const LETTER_TYPES = {
+    deposit: {
+      title: "Security Deposit Not Returned",
+      subject: "Demand for Return of Security Deposit",
+      recipientLabel: "Landlord / property manager's name",
+      recipientAddressLabel: "Landlord / property manager's address",
+      dateLabel: "Move-out date",
+      dateHint: "the date you vacated the property",
+      detailsLabel: "Briefly describe the unit, move-out, and any communication since",
+      body: (d) => [
+        `I am writing regarding the security deposit for the property I rented, which I vacated on ${d.keyDateFormatted}. As of the date of this letter, you have not returned my deposit of $${d.amount}, nor have you provided an itemized statement of any deductions.`,
+        `${d.details}`,
+        `Under general landlord-tenant practice in ${d.state}, security deposits must be returned (or accounted for with an itemized list of deductions) within a set number of days after move-out. That window has now passed.`,
+        `I am requesting that you return the full deposit of $${d.amount}, or provide a complete itemized list of any lawful deductions, within ${d.deadline} days of the date of this letter. If I do not receive a response, I will consider further action, including filing in small claims court, where some states allow for penalties beyond the deposit amount when deposits are wrongfully withheld.`
+      ]
+    },
+    refund: {
+      title: "Refund Owed",
+      subject: "Demand for Refund",
+      recipientLabel: "Business name",
+      recipientAddressLabel: "Business address",
+      dateLabel: "Date of purchase / payment",
+      dateHint: "when you paid or placed the order",
+      detailsLabel: "What did you pay for, and what went wrong?",
+      body: (d) => [
+        `On ${d.keyDateFormatted}, I paid $${d.amount} to your business. ${d.details}`,
+        `Despite my efforts to resolve this directly, I have not received the refund, product, or service I am owed.`,
+        `I am requesting a full refund of $${d.amount} within ${d.deadline} days of the date of this letter. If a refund is not issued, I will consider further options, including filing a complaint with my state's consumer protection office, my bank or card issuer for a chargeback, or pursuing a claim in small claims court.`
+      ]
+    },
+    wages: {
+      title: "Unpaid Final Wages",
+      subject: "Demand for Payment of Final Wages",
+      recipientLabel: "Employer name",
+      recipientAddressLabel: "Employer address",
+      dateLabel: "Last date of employment",
+      dateHint: "your final day of work",
+      detailsLabel: "What's unpaid, and what have you been told so far?",
+      body: (d) => [
+        `My last day of employment with your company was ${d.keyDateFormatted}. As of the date of this letter, I have not received my final paycheck in the amount of $${d.amount}.`,
+        `${d.details}`,
+        `Most states require final wages to be paid within a specific window after separation, and some impose penalties on employers who fail to meet that deadline. I am requesting payment of $${d.amount} within ${d.deadline} days of the date of this letter.`,
+        `If payment is not received, I will consider filing a wage claim with my state's labor department and may pursue this matter further, including any penalties available under ${d.state} law for late final payment.`
+      ]
+    },
+    damage: {
+      title: "Property Damage",
+      subject: "Demand for Compensation for Property Damage",
+      recipientLabel: "Responsible party's name",
+      recipientAddressLabel: "Responsible party's address",
+      dateLabel: "Date of damage",
+      dateHint: "when the damage occurred",
+      detailsLabel: "Describe what was damaged and how it happened",
+      body: (d) => [
+        `On ${d.keyDateFormatted}, my property was damaged due to your actions. ${d.details}`,
+        `The cost to repair or replace this property is $${d.amount}. I have attempted to resolve this directly without success.`,
+        `I am requesting payment of $${d.amount} within ${d.deadline} days of the date of this letter to cover the cost of repair or replacement. If payment is not received, I will consider pursuing this matter in small claims court.`
+      ]
+    },
+    contract: {
+      title: "Breach of Contract",
+      subject: "Demand for Performance Under Contract",
+      recipientLabel: "Other party's name",
+      recipientAddressLabel: "Other party's address",
+      dateLabel: "Date of breach",
+      dateHint: "when the agreement was broken",
+      detailsLabel: "Describe the agreement and how it was broken",
+      body: (d) => [
+        `This letter concerns our agreement, which you breached on or around ${d.keyDateFormatted}. ${d.details}`,
+        `As a result of this breach, I have incurred damages of $${d.amount}.`,
+        `I am requesting that you cure this breach or pay $${d.amount} in damages within ${d.deadline} days of the date of this letter. If this matter is not resolved, I will consider pursuing legal remedies available to me, including filing a claim in court.`
+      ]
+    },
+    invoice: {
+      title: "Unpaid Invoice",
+      subject: "Demand for Payment of Outstanding Invoice",
+      recipientLabel: "Client / business name",
+      recipientAddressLabel: "Client / business address",
+      dateLabel: "Invoice due date",
+      dateHint: "when payment was originally due",
+      detailsLabel: "Describe the work or goods provided and any prior follow-up",
+      body: (d) => [
+        `Payment for services or goods I provided was due on ${d.keyDateFormatted}. As of the date of this letter, the outstanding balance of $${d.amount} remains unpaid.`,
+        `${d.details}`,
+        `I am requesting full payment of $${d.amount} within ${d.deadline} days of the date of this letter. If payment is not received, I will consider further action, including pursuing this matter in small claims court and may add interest or late fees as permitted under our agreement or ${d.state} law.`
+      ]
+    },
+    collector: {
+      title: "Debt Collector Overreach",
+      subject: "Demand to Cease Improper Collection Practices",
+      recipientLabel: "Collection agency name",
+      recipientAddressLabel: "Collection agency address",
+      dateLabel: "Date of most recent contact",
+      dateHint: "the most recent time they contacted you",
+      detailsLabel: "Describe the contact, frequency, or claimed amount that's in dispute",
+      body: (d) => [
+        `I am writing regarding your attempts to collect a debt, the most recent of which occurred on ${d.keyDateFormatted}. ${d.details}`,
+        `The amount you are claiming, $${d.amount}, is disputed. Under the Fair Debt Collection Practices Act and applicable ${d.state} law, I am entitled to request validation of this debt and to have collection contact limited.`,
+        `I am requesting that you provide written validation of this debt and cease any further contact that violates federal or state debt collection rules within ${d.deadline} days of the date of this letter. If improper contact continues, I will consider filing a complaint with the Consumer Financial Protection Bureau and my state attorney general's office.`
+      ]
+    },
+    general: {
+      title: "General Demand",
+      subject: "Formal Demand Letter",
+      recipientLabel: "Other party's name",
+      recipientAddressLabel: "Other party's address",
+      dateLabel: "Date of incident",
+      dateHint: "when the issue occurred",
+      detailsLabel: "Describe what happened in your own words",
+      body: (d) => [
+        `This letter concerns an issue that occurred on or around ${d.keyDateFormatted}. ${d.details}`,
+        `As a result, I am owed $${d.amount}.`,
+        `I am requesting payment of $${d.amount} within ${d.deadline} days of the date of this letter. If this matter is not resolved, I will consider pursuing all options available to me, including legal action.`
+      ]
     }
-    const cells = Array.from(grid.children);
-    const litIndices = [2,5,9,13,18,21,24,27,31,34,37,40,43,47];
-    litIndices.forEach((idx, i) => {
-      setTimeout(() => cells[idx].classList.add('lit'), 300 + i * 90);
-    });
+  };
+
+  const TYPE_ORDER = ["deposit","refund","wages","damage","contract","invoice","collector","general"];
+  const TYPE_DESCRIPTIONS = {
+    deposit: "Landlord kept it, went silent, or missed the deadline to return it.",
+    refund: "A business took payment and never delivered, or won't honor its policy.",
+    wages: "Last paycheck is late or short, past the required payout window.",
+    damage: "Someone damaged your property and won't cover repair costs.",
+    contract: "A signed agreement was broken and needs to be documented.",
+    invoice: "You did the work or delivered the goods. Payment never came.",
+    collector: "Harassment, wrong amounts, or contact after you've asked them to stop.",
+    general: "Doesn't fit a category above, but you need it on the record."
+  };
+
+  // ---------- state ----------
+  let selectedType = null;
+  let lastLetterText = "";
+
+  // ---------- screen 1: build type grid ----------
+  const typeGrid = document.getElementById('typeGrid');
+  TYPE_ORDER.forEach(key => {
+    const t = LETTER_TYPES[key];
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'type-card';
+    card.innerHTML = `<div class="file-tab"></div><h4>${t.title}</h4><p>${TYPE_DESCRIPTIONS[key]}</p>`;
+    card.addEventListener('click', () => selectType(key));
+    typeGrid.appendChild(card);
   });
 
-  // Re-trigger letter typing animation on scroll into view (for users who scroll back up)
-  const letter = document.querySelector('.letter');
-  if (letter && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          letter.querySelectorAll('.letter-line').forEach(line => {
-            line.style.animation = 'none';
-            requestAnimationFrame(() => { line.style.animation = ''; });
-          });
-        }
-      });
-    }, { threshold: 0.4 });
-    io.observe(letter);
+  // populate states dropdown
+  const stateSelect = document.getElementById('f_state');
+  STATES.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s; opt.textContent = s;
+    stateSelect.appendChild(opt);
+  });
+
+  function showScreen(id, stepLabel){
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('progressLabel').textContent = stepLabel;
+    window.scrollTo({top:0, behavior:'smooth'});
   }
+
+  function selectType(key){
+    selectedType = key;
+    const t = LETTER_TYPES[key];
+    document.getElementById('formTitle').textContent = t.title;
+    document.getElementById('recipientLabel').textContent = t.recipientLabel;
+    document.getElementById('recipientAddressLabel').textContent = t.recipientAddressLabel;
+    document.getElementById('dateLabel').textContent = t.dateLabel;
+    document.getElementById('dateHint').textContent = t.dateHint;
+    document.getElementById('detailsLabel').textContent = t.detailsLabel;
+    showScreen('screen-form', 'Step 2 of 3');
+  }
+
+  document.getElementById('backToType').addEventListener('click', () => {
+    showScreen('screen-type', 'Step 1 of 3');
+  });
+
+  document.getElementById('editBtn').addEventListener('click', () => {
+    showScreen('screen-form', 'Step 2 of 3');
+  });
+
+  document.getElementById('startOverBtn').addEventListener('click', () => {
+    document.getElementById('letterForm').reset();
+    selectedType = null;
+    showScreen('screen-type', 'Step 1 of 3');
+  });
+
+  function formatDate(isoStr){
+    if(!isoStr) return '';
+    const d = new Date(isoStr + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  }
+
+  function todayFormatted(){
+    return new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  }
+
+  document.getElementById('letterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!selectedType) return;
+
+    const data = {
+      yourName: document.getElementById('f_yourName').value.trim(),
+      yourAddress: document.getElementById('f_yourAddress').value.trim(),
+      state: document.getElementById('f_state').value,
+      recipientName: document.getElementById('f_recipientName').value.trim(),
+      recipientAddress: document.getElementById('f_recipientAddress').value.trim(),
+      amount: document.getElementById('f_amount').value.trim(),
+      keyDateFormatted: formatDate(document.getElementById('f_keyDate').value),
+      deadline: document.getElementById('f_deadline').value,
+      details: document.getElementById('f_details').value.trim()
+    };
+
+    renderLetter(selectedType, data);
+    showScreen('screen-output', 'Step 3 of 3');
+  });
+
+  function renderLetter(typeKey, d){
+    const t = LETTER_TYPES[typeKey];
+    const bodyParagraphs = t.body(d);
+    const docEl = document.getElementById('letterDoc');
+
+    docEl.innerHTML = `
+      <div class="lhead">
+        <div class="name">${escapeHtml(d.yourName)}</div>
+        <div>${escapeHtml(d.yourAddress)}</div>
+      </div>
+      <div class="ldate">${todayFormatted()}</div>
+      <div class="lrecipient">
+        <div>${escapeHtml(d.recipientName)}</div>
+        <div>${escapeHtml(d.recipientAddress)}</div>
+      </div>
+      <div class="lre">RE: ${t.subject}</div>
+      <div class="lbody">
+        <p>Dear ${escapeHtml(d.recipientName)},</p>
+        ${bodyParagraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('')}
+        <p>Please treat this letter as formal written notice of this demand. I am keeping a copy for my records.</p>
+      </div>
+      <div class="lsign">
+        <p>Sincerely,</p>
+        <p>${escapeHtml(d.yourName)}</p>
+      </div>
+      <div class="statute-note">Sent via certified mail, return receipt requested — ${escapeHtml(d.state)}.</div>
+    `;
+
+    lastLetterText = buildPlainText(d, t, bodyParagraphs);
+  }
+
+  function buildPlainText(d, t, bodyParagraphs){
+    return [
+      d.yourName,
+      d.yourAddress,
+      '',
+      todayFormatted(),
+      '',
+      d.recipientName,
+      d.recipientAddress,
+      '',
+      `RE: ${t.subject}`,
+      '',
+      `Dear ${d.recipientName},`,
+      '',
+      ...bodyParagraphs.flatMap(p => [p, '']),
+      'Please treat this letter as formal written notice of this demand. I am keeping a copy for my records.',
+      '',
+      'Sincerely,',
+      d.yourName
+    ].join('\n');
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+  document.getElementById('copyBtn').addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(lastLetterText);
+      const btn = document.getElementById('copyBtn');
+      const original = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      setTimeout(() => { btn.textContent = original; }, 1800);
+    }catch(err){
+      alert('Could not copy automatically — please select and copy the text manually.');
+    }
+  });
 </script>
 
 </body>
 </html>
-
